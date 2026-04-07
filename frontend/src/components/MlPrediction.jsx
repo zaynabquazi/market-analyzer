@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { BrainCircuit, TrendingUp, TrendingDown, Loader } from 'lucide-react'
 
+const BASE = import.meta.env.VITE_API_URL ?? ''
+const predictUrl = (ticker) => `${BASE}/predict/${ticker}`
+
 export default function MlPrediction({ ticker }) {
   const [result, setResult]   = useState(null)
   const [loading, setLoading] = useState(false)
@@ -11,7 +14,7 @@ export default function MlPrediction({ ticker }) {
     setError(null)
     setResult(null)
     try {
-      const res = await fetch(`/predict/${ticker}`)
+      const res = await fetch(predictUrl(ticker))
       if (!res.ok) {
         const e = await res.json()
         throw new Error(e.detail || 'Prediction failed')
@@ -32,16 +35,18 @@ export default function MlPrediction({ ticker }) {
 
   return (
     <div className="bg-card border border-border rounded-2xl p-5">
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
         <div className="flex items-center gap-2">
-          <BrainCircuit className="w-5 h-5 text-accent" />
-          <p className="text-white font-semibold">ML Prediction</p>
-          <span className="text-xs text-gray-500 ml-1">Random Forest · trained on 5y of data</span>
+          <BrainCircuit className="w-5 h-5 text-accent shrink-0" />
+          <div>
+            <p className="text-white font-semibold">ML Prediction</p>
+            <p className="text-xs text-gray-500">Random Forest · trained on 5y of data</p>
+          </div>
         </div>
         <button
           onClick={run}
           disabled={loading}
-          className="flex items-center gap-2 bg-accent hover:bg-accent/80 disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded-xl transition"
+          className="flex items-center justify-center gap-2 bg-accent hover:bg-accent/80 disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded-xl transition w-full sm:w-auto"
         >
           {loading ? <Loader className="w-4 h-4 animate-spin" /> : '🤖 Run Prediction'}
         </button>

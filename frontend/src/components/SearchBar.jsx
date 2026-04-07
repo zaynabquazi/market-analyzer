@@ -12,7 +12,7 @@ export default function SearchBar({ onSearch, period, onPeriodChange }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
       <div className="relative flex-1">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 w-4 h-4" />
         <input
@@ -29,7 +29,7 @@ export default function SearchBar({ onSearch, period, onPeriodChange }) {
             key={p}
             type="button"
             onClick={() => onPeriodChange(p)}
-            className={`px-4 py-3 rounded-xl text-sm font-medium border transition
+            className={`flex-1 py-3 rounded-xl text-sm font-medium border transition
               ${period === p
                 ? 'bg-accent border-accent text-white'
                 : 'bg-card border-border text-gray-400 hover:border-accent/50'}`}
@@ -37,14 +37,13 @@ export default function SearchBar({ onSearch, period, onPeriodChange }) {
             {p}
           </button>
         ))}
+        <button
+          type="submit"
+          className="flex-1 bg-accent hover:bg-accent/80 text-white font-semibold px-4 py-3 rounded-xl transition"
+        >
+          Analyze
+        </button>
       </div>
-
-      <button
-        type="submit"
-        className="bg-accent hover:bg-accent/80 text-white font-semibold px-6 py-3 rounded-xl transition"
-      >
-        Analyze
-      </button>
     </form>
   )
 }

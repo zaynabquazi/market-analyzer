@@ -6,6 +6,9 @@ import PriceChart from './components/PriceChart'
 import RsiChart from './components/RsiChart'
 import MlPrediction from './components/MlPrediction'
 
+const BASE = import.meta.env.VITE_API_URL ?? ''
+const analyzeUrl = (ticker, period) => `${BASE}/analyze/${ticker}?period=${period}`
+
 export default function App() {
   const [data, setData]       = useState(null)
   const [loading, setLoading] = useState(false)
@@ -17,7 +20,7 @@ export default function App() {
     setError(null)
     setData(null)
     try {
-      const res = await fetch(`/analyze/${ticker}?period=${period}`)
+      const res = await fetch(analyzeUrl(ticker, period))
       if (!res.ok) {
         const err = await res.json()
         throw new Error(err.detail || 'Failed to fetch data')
@@ -31,7 +34,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-surface px-4 py-10 max-w-5xl mx-auto">
+    <div className="min-h-screen bg-surface px-4 py-8 sm:py-10 max-w-5xl mx-auto w-full">
       <header className="mb-10">
         <h1 className="text-3xl font-bold text-white mb-1">🔥 Market Analyzer</h1>
         <p className="text-gray-400 text-sm">Real-time technical analysis for stocks &amp; crypto</p>
