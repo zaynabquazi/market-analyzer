@@ -37,7 +37,7 @@ export default function App() {
     <div className="min-h-screen bg-surface px-4 py-8 sm:py-10 max-w-5xl mx-auto w-full">
       <header className="mb-10">
         <h1 className="text-3xl font-bold text-white mb-1">🔥 Market Analyzer Monkey</h1>
-        <p className="text-gray-400 text-sm">Real-time technical analysis for stocks &amp; crypto</p>
+        <p className="text-gray-400 text-sm">Real-time technical analysis for stocks &amp; crypto — Zaynab Muzaffar Quazi</p>
       </header>
 
       <SearchBar onSearch={handleSearch} period={period} onPeriodChange={setPeriod} />
