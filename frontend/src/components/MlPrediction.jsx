@@ -39,7 +39,7 @@ export default function MlPrediction({ ticker }) {
         <div className="flex items-center gap-2">
           <BrainCircuit className="w-5 h-5 text-accent shrink-0" />
           <div>
-            <p className="text-white font-semibold">ML Prediction</p>
+            <p className="text-white font-semibold">Estimated Prediction</p>
             <p className="text-xs text-gray-500">Random Forest · trained on 5y of data</p>
           </div>
         </div>
